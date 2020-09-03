@@ -13,6 +13,8 @@ public class App {
 				console.welcomeMsg();
 
 			} else if (args[0].equals("gui")) {
+				Gui gui = new Gui();
+				gui.display();
 				System.out.println("GIU component will be avaible soon.");
 				System.exit(0);
 			} else {
