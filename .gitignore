@@ -1,2 +1,5 @@
 .vscode
 swingy/target
+.classpath
+.project
+.settings/
