@@ -14,9 +14,9 @@ public class App {
 
 			} else if (args[0].equals("gui")) {
 				Gui gui = new Gui();
-				gui.display();
+				gui.welcomeMsg();
 				System.out.println("GIU component will be avaible soon.");
-				System.exit(0);
+				// System.exit(0);
 			} else {
 				System.out.println("Use \"console\" or \"gui\" as an argument.");
 				System.exit(0);
