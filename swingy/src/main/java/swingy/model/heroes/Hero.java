@@ -3,23 +3,21 @@ package swingy.model.heroes;
 public abstract class Hero {
 	private String name;
 	private String heroClass;
-	private int xp  = 0;
-	private int level = 0;
 	private int hp;
-	private int weapon;
-	private int armor;
-	private int helm;
+	private int attack;
+	private int defense;
+	protected int xp;
+	protected int level;
 
-	public Hero(String name, String heroClass, int hp, int weapon, int armor, int helm) {
+	public Hero(String name, String heroClass, int hp, int attack, int defense) {
 		this.name = name;
 		this.heroClass = heroClass;
 		this.hp = hp;
-		this.weapon = weapon;
-		this.armor = armor;
-		this.helm = helm;
+		this.attack = attack;
+		this.defense = defense;
 	}
 	
-	public String getHeroclass() {
+	public String getHeroType() {
 		return heroClass;
 	}
 
@@ -41,17 +39,12 @@ public abstract class Hero {
 	}
 
 	// set different weapons for different heroClasses
-	public int getWeapon() {
-		return weapon;
+	public int getAttack() {
+		return attack;
 	}
 
 	// armor increases with level
-	public int getArmor() {
-		return armor;
-	}
-
-	// find a use for helm
-	public int getHelm() {
-		return helm;
+	public int getDefense() {
+		return defense;
 	}
 }

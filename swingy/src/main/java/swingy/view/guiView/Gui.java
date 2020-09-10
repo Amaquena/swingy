@@ -1,21 +1,21 @@
 package swingy.view.guiView;
 
-import java.awt.BorderLayout;
+// import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+// import java.awt.Dimension;
+// import java.awt.FlowLayout;
+// import java.awt.Font;
 
 import javax.swing.*;
 
-public final class Gui {
+public class Gui {
 	private JFrame frame = null;
 	private JPanel panel = new JPanel();
 
 	// Main Menu layout
 	private JButton newGameButton;
 	private JButton loadGameButton;
-	private JButton helpButton;
+	// private JButton helpButton;
 	private JLabel headerLabel;
 	private GroupLayout layout;
 
@@ -40,7 +40,7 @@ public final class Gui {
 	public void mainMenu() {
 		newGameButton = new JButton("New Game");
 		loadGameButton = new JButton("Load Game");
-		helpButton = new JButton("Help");
+		// helpButton = new JButton("Help");
 
 		headerLabel = new JLabel("SWINGY");
 
