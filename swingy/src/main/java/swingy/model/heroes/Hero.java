@@ -3,18 +3,15 @@ package swingy.model.heroes;
 public abstract class Hero {
 	private String name;
 	private String heroClass;
-	private int hp;
-	private int attack;
-	private int defense;
+	protected int hp;
+	protected int attack;
+	protected int defense;
 	protected int xp;
 	protected int level;
 
-	public Hero(String name, String heroClass, int hp, int attack, int defense) {
+	public Hero(String name, String heroClass) {
 		this.name = name;
 		this.heroClass = heroClass;
-		this.hp = hp;
-		this.attack = attack;
-		this.defense = defense;
 	}
 	
 	public String getHeroType() {

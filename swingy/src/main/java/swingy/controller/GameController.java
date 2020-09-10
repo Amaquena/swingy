@@ -29,8 +29,12 @@ public class GameController {
 		if (mainMenuCommand == 1) {
 			characterCreation();
 		} else if (mainMenuCommand == 2) {
-
+			//TODO: LoadGame information from a textfile
 		}
+		game.createMap();
+		game.addPlayerToMap();
+		game.addEnemiesToMap();
+		console.displayMap(game.getMap(), game.getMapSize());
 	}
 
 	public void characterCreation() {

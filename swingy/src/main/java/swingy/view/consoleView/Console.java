@@ -7,6 +7,16 @@ import java.io.InputStreamReader;
 import swingy.controller.GameController;
 
 public class Console {
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
+
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private GameController gameController = null;
 
@@ -54,7 +64,7 @@ public class Console {
 	public String getHeroClass() {
 		try {
 			String heroClass = "";
-			System.out.println("\tSelect Hero Class");
+			System.out.println("\n\tSelect Hero Class");
 			System.out.println("\t1- Mage\n\t2- Knight\n\t3- Archer\n\t4- Samurai");
 			while (!heroClass.equals("1") && !heroClass.equals("2") && !heroClass.equals("3") && !heroClass.equals("4")) {
 				System.out.print("Enter: ");
@@ -75,5 +85,18 @@ public class Console {
 			System.out.print("I/O error");
 		}
 		return null;
+	}
+
+	public void displayMap(char[][] map, int mapSize) {
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				if (map[i][j] == 'P') {
+					System.out.print(ANSI_CYAN + map[i][j] + ANSI_RESET + " ");	
+				} else {
+					System.out.print(map[i][j] + " ");
+				}
+			}
+			System.out.println();
+		}
 	}
 }
