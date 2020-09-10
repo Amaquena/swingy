@@ -2,14 +2,13 @@ package swingy.controller;
 
 import javax.swing.SwingUtilities;
 
-import swingy.model.heroes.GenerateHero;
-import swingy.model.heroes.Hero;
+import swingy.model.Game;
 import swingy.view.consoleView.Console;
 import swingy.view.guiView.Gui;
 
 public class GameController {
 	private Console console = null;
-	private Hero player = null;
+	private Game game = new Game();
 
 	public GameController (int interfaceType) {
 		if (interfaceType == 1) {
@@ -37,6 +36,6 @@ public class GameController {
 	public void characterCreation() {
 		String heroName = console.getHeroName();
 		String heroClass = console.getHeroClass();
-		player = GenerateHero.newHero(heroName, heroClass);
+		game.createPlayer(heroName, heroClass);
 	}
 }
