@@ -1,29 +1,26 @@
 package swingy;
 
-import swingy.view.*;
+import swingy.controller.GameController;
 
 public class App {
 	public static void main(String[] args) {
-		
+		byte interfaceType = 0;
+
 		try {
-
-			// TODO: Set up controller to handle views and models
-			if (args[0].equals("console")) {
-				Console console = new Console();
-				console.welcomeMsg();
-
-			} else if (args[0].equals("gui")) {
-				Gui gui = new Gui();
-				gui.welcomeMsg();
-				System.out.println("GIU component will be avaible soon.");
-				// System.exit(0);
+			if (args[0].equalsIgnoreCase("console")) {
+				interfaceType = 1;
+			} else if (args[0].equalsIgnoreCase("gui")) {
+				interfaceType = 2;
 			} else {
-				System.out.println("Use \"console\" or \"gui\" as an argument.");
+				System.err.println("Use \"console\" or \"gui\" as an argument.");
 				System.exit(0);
 			}
+			new GameController(interfaceType);
 			
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println("Use \"console\" or \"gui\" as an argument.");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 	}
 }
