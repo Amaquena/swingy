@@ -14,7 +14,7 @@ public abstract class Hero {
 		this.heroClass = heroClass;
 	}
 	
-	public String getHeroType() {
+	public String getHeroClass() {
 		return heroClass;
 	}
 
@@ -30,17 +30,14 @@ public abstract class Hero {
 		return level;
 	}
 
-	// set different HP points for different heroClasses
 	public int getHp() {
 		return hp;
 	}
 
-	// set different weapons for different heroClasses
 	public int getAttack() {
 		return attack;
 	}
 
-	// armor increases with level
 	public int getDefense() {
 		return defense;
 	}

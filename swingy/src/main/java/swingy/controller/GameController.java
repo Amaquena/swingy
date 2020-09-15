@@ -3,12 +3,13 @@ package swingy.controller;
 import javax.swing.SwingUtilities;
 
 import swingy.model.Game;
+import swingy.model.heroes.Hero;
 import swingy.view.consoleView.Console;
-import swingy.view.guiView.Gui;
+// import swingy.view.guiView.Gui;
 
 public class GameController {
-	private Console console = null;
-	private Game game = new Game();
+	private static Console console = null;
+	private static Game game = null;
 
 	public GameController (int interfaceType) {
 		if (interfaceType == 1) {
@@ -16,7 +17,7 @@ public class GameController {
 		} else if (interfaceType == 2) {
 			SwingUtilities.invokeLater(new Runnable(){
 				public void run() {
-					new Gui();
+					// new Gui();
 				}
 			});
 		}
@@ -26,20 +27,40 @@ public class GameController {
 	}
 
 	public void initializeGame(int mainMenuCommand) {
+		game = new Game(this);
 		if (mainMenuCommand == 1) {
 			characterCreation();
 		} else if (mainMenuCommand == 2) {
 			//TODO: LoadGame information from a textfile
 		}
-		game.createMap();
-		game.addPlayerToMap();
-		game.addEnemiesToMap();
-		console.displayMap(game.getMap(), game.getMapSize());
+		mapCreation();
 	}
 
 	public void characterCreation() {
 		String heroName = console.getHeroName();
-		String heroClass = console.getHeroClass();
+		String heroClass = console.getHeroType();
 		game.createPlayer(heroName, heroClass);
+	}
+
+	public void mapCreation() {
+		game.createMap();
+	}
+
+	public void startGame(char[][] map, int mapSize, Hero player) {
+		console.displayInstructions();
+		console.displayPlayerStats(player);
+		console.displayMap(map, mapSize);
+
+		String userCommand = null;
+		while (player.getLevel() < 6) {
+			userCommand = console.moveCharacter();
+			game.handleCommand(userCommand);
+			console.displayMap(map, mapSize);
+		}
+	}
+
+	public void outOfbounds() {
+		console.outOfBoundsMessage();
+		mapCreation();
 	}
 }

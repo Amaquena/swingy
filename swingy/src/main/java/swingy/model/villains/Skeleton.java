@@ -2,8 +2,8 @@ package swingy.model.villains;
 
 public class Skeleton extends Villain {
 
-	public Skeleton(int damage, int hp) {
-		super("skeleton", damage, hp);
+	public Skeleton() {
+		super("skeleton", 6, 14, 60);
 	}
 	
 }
