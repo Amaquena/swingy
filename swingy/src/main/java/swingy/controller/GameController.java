@@ -11,11 +11,11 @@ public class GameController {
 	private static Console console = null;
 	private static Game game = null;
 
-	public GameController (int interfaceType) {
+	public GameController(int interfaceType) {
 		if (interfaceType == 1) {
 			console = new Console(this);
 		} else if (interfaceType == 2) {
-			SwingUtilities.invokeLater(new Runnable(){
+			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					// new Gui();
 				}
@@ -31,7 +31,7 @@ public class GameController {
 		if (mainMenuCommand == 1) {
 			characterCreation();
 		} else if (mainMenuCommand == 2) {
-			//TODO: LoadGame information from a textfile
+			// TODO: LoadGame information from a textfile
 		}
 		mapCreation();
 	}
@@ -52,15 +52,33 @@ public class GameController {
 		console.displayMap(map, mapSize);
 
 		String userCommand = null;
-		while (player.getLevel() < 6) {
-			userCommand = console.moveCharacter();
-			game.handleCommand(userCommand);
-			console.displayMap(map, mapSize);
-		}
+		userCommand = console.moveCharacter();
+		game.handleCommand(userCommand);
+	}
+
+	public void gameLoop(char[][] map, int mapSize, Hero player) {
+		String userCommand = null;
+
+		console.displayPlayerStats(player);		
+		console.displayMap(map, mapSize);
+		userCommand = console.moveCharacter();
+		game.handleCommand(userCommand);
 	}
 
 	public void outOfbounds() {
 		console.outOfBoundsMessage();
-		mapCreation();
+	}
+
+	public void initiateFight(String enemy) {
+		String command = console.runOrFight(enemy);
+		game.handleCommand(command);
+	}
+
+	public void combat() {
+		console.combatMessage();
+	}
+
+	public void flee() {
+		console.fleeMessage();
 	}
 }

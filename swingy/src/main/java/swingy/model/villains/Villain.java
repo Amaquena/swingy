@@ -2,13 +2,13 @@ package swingy.model.villains;
 
 public abstract class Villain {
 	private String type;
-	private int damage;
+	private int attack;
 	private int hp;
 	private int xp;
 
-	public Villain(String type, int damage, int hp, int xp) {
+	public Villain(String type, int attack, int hp, int xp) {
 		this.type = type;
-		this.setDamage(damage);
+		this.setAttack(attack);
 		this.setHp(hp);
 		this.setXp(xp);
 	}
@@ -33,11 +33,11 @@ public abstract class Villain {
 		this.hp = hp;
 	}
 
-	public int getDamage() {
-		return damage;
+	public int getAttack() {
+		return attack;
 	}
 
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setAttack(int attack) {
+		this.attack = attack;
 	}
 }

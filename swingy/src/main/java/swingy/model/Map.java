@@ -3,10 +3,11 @@ package swingy.model;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Map {
-	private char map[][] = null;
+	private char map[][];
 	private int mapSize;
 
 	public void generateMap(int playerLevel) {
+		map = null;
 		mapSize = (playerLevel - 1) * 5 + 10 - (playerLevel % 2);
 		map = new char[mapSize][mapSize];
 		for (int i = 0; i < mapSize; i++) {

@@ -119,7 +119,7 @@ public class Console {
 	}
 
 	public void displayPlayerStats(Hero player) {
-		clearScreen();
+		// clearScreen();
 		System.out.println("Name: " + player.getName());
 		System.out.println("Class: " + capitalize(player.getHeroClass()));
 		System.out.println("Hp: " + player.getHp());
@@ -162,7 +162,29 @@ public class Console {
 	}
 
 	public void outOfBoundsMessage() {
-		System.out.println("Well Done! You've managed to have fallen off\nFlat earth confirmed.");
+		System.out.println("Well Done! You've managed to have fallen off.\nFlat earth confirmed.");
 	}
 
+	public String runOrFight(String enemy) {
+		System.out.println("You've encounted a "+enemy+", do you \"run\" or \"fight\"?");
+
+		try {
+			String command = "";
+			while (!command.equalsIgnoreCase("run") && !command.equalsIgnoreCase("fight")) {
+				command = br.readLine();
+			}
+			return command;
+		} catch (IOException e) {
+			System.err.println("I/O error");
+		}
+		return null;
+	}
+
+	public void combatMessage() {
+		System.out.println("You've engaged combat, good luck!");
+	}
+
+	public void fleeMessage() {
+		System.out.println("You've ran away, chicken! you find yourself at the samePlace. What now?");
+	}
 }
