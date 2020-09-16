@@ -74,8 +74,8 @@ public class GameController {
 		game.handleCommand(command);
 	}
 
-	public void combat() {
-		console.combatMessage();
+	public void combat(String output) {
+		console.combatMessage(output);
 	}
 
 	public void flee() {

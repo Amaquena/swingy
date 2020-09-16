@@ -1,6 +1,11 @@
 package swingy.model.heroes;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public abstract class Hero {
+	@NotNull(message = "Name cannot be null")
+	@Size(min = 2, max = 10)
 	private String name;
 	private String heroClass;
 	protected int hp;
@@ -40,5 +45,9 @@ public abstract class Hero {
 
 	public int getDefense() {
 		return defense;
+	}
+
+	public void takeDamage(int damage) {
+		hp -= damage;
 	}
 }

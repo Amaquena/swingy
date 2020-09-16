@@ -9,7 +9,7 @@ public class GenerateVillain {
 				return (new Goblin());
 			case "skeleton":
 				return (new Skeleton());
-			case "samurai":
+			case "zombie":
 				return (new Zombie());
 			default:
 				break;

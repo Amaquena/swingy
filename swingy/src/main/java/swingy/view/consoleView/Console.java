@@ -163,12 +163,14 @@ public class Console {
 
 	public void outOfBoundsMessage() {
 		System.out.println("Well Done! You've managed to have fallen off.\nFlat earth confirmed.");
+		pressEnterToContinue();
 	}
 
 	public String runOrFight(String enemy) {
 		System.out.println("You've encounted a "+enemy+", do you \"run\" or \"fight\"?");
 
 		try {
+
 			String command = "";
 			while (!command.equalsIgnoreCase("run") && !command.equalsIgnoreCase("fight")) {
 				command = br.readLine();
@@ -180,11 +182,13 @@ public class Console {
 		return null;
 	}
 
-	public void combatMessage() {
-		System.out.println("You've engaged combat, good luck!");
+	public void combatMessage(String output) {
+		System.out.println(output);
+		pressEnterToContinue();
 	}
 
 	public void fleeMessage() {
 		System.out.println("You've ran away, chicken! you find yourself at the samePlace. What now?");
+		pressEnterToContinue();
 	}
 }
