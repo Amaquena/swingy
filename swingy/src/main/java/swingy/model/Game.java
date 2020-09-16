@@ -117,21 +117,19 @@ public class Game {
 
 	private void engangeCombat(int heroInit, int villainInit) {
 		int damage = 0;
-		boolean firstHit = false;
+		boolean firstHit = true;
 
 		if (heroInit >= villainInit) {
 			// TODO: hero attack first
 			// TODO: add Artifact to damage calculation
 			gameController.combat("You land the first attack.");
-			firstHit = true;
 			do {
 				if (!firstHit) {
 					gameController.combat("You come swinging.");
 				}
+				firstHit = false;
 				damage = player.getAttack();
-				System.out.println("Game.engangeCombat()1");
 				enemy.takeDamage(damage);
-				System.out.println("Game.engangeCombat()2");
 				gameController
 						.combat(enemy.getName() + " took " + damage + " damage. It has " + enemy.getHp() + " hp left.");
 				if (enemy.getHp() <= 0) {
@@ -149,11 +147,11 @@ public class Game {
 			// TODO: villain attack first
 			// TODO: add Artifact to defense calculation (subtract from enemy attack)
 			gameController.combat(enemy.getName() + " lands the first attack.");
-			firstHit = true;
 			do {
 				if (!firstHit) {
 					gameController.combat(enemy.getName() + " comes swinging.");
 				}
+				firstHit = false;
 				damage = enemy.getAttack();
 				player.takeDamage(damage);
 				gameController.combat("You took " + damage + " damage. You have " + player.getHp() + " hp left.");
@@ -177,6 +175,7 @@ public class Game {
 		}
 		if (enemy.getHp() <= 0) {
 			gameController.combat("Enemy defeated.");
+			map.updateMap();
 		}
 	}
 
@@ -190,5 +189,6 @@ public class Game {
 			gameController.gameLoop(map.getMap(), map.getMapSize(), player);
 		}
 	}
+
 
 }

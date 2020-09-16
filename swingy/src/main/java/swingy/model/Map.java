@@ -5,6 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Map {
 	private char map[][];
 	private int mapSize;
+	private String direction;
+	private int[] location;
 
 	public void generateMap(int playerLevel) {
 		map = null;
@@ -49,9 +51,10 @@ public class Map {
 
 	public char investigatePosition(String direction) {
 		char mapPoint = 'X';
-		int[] playerLocation = findPlayerPosition();
-		int i = playerLocation[0];
-		int j = playerLocation[1];
+		this.direction = direction;
+		this.location = findPlayerPosition();
+		int i = this.location[0];
+		int j = this.location[1];
 
 		// System.out.println("Player Position:\ni: " + playerLocation[0] + "\nj: " + playerLocation[1]);
 		if (direction.equalsIgnoreCase("north")) {
@@ -73,7 +76,7 @@ public class Map {
 		}
 
 		if (mapPoint == 'O') {
-			updateMap(playerLocation, direction);
+			updateMap();
 		}
 		return mapPoint;
 	}
@@ -93,9 +96,9 @@ public class Map {
 		return loc;
 	}
 
-	public void updateMap(int[] playerLocation, String direction) {
-		int i = playerLocation[0];
-		int j = playerLocation[1];
+	public void updateMap() {
+		int i = location[0];
+		int j = location[1];
 
 		map[i][j] = 'O';
 		if (direction.equalsIgnoreCase("north")) {
@@ -109,4 +112,5 @@ public class Map {
 		}
 	}
 
+	
 }
