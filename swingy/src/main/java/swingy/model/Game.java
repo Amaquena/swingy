@@ -16,6 +16,12 @@ public class Game {
 	private static Gamble dice = null;
 	private static GameController gameController;
 	private static String enemies[] = { "orc", "skeleton", "zombie", "goblin" };
+	private static String weapons[] = { "Crimson Blade", "Demonic Sword", "Enma", "Green Arrow", "Staff of Zeus",
+			"Trident", "lightning Rod", "Rainbow Rod" };
+	private static String armor[] = { "Ancient Set", "Cloth", "Diamond Armor", "Dragon Scales", "Kimono", "Shitagi",
+			"Silk Robe", "Unholy Drawers" };
+	private static String helm[] = { "Cap", "Eye Patch", "Farseer Mask", "Headband", "Helm of Destiny",
+			"I can't believe it's Not bacon", "Iron Helmet", "Magic Hat" };
 	private static Villain enemy = null;
 
 	public Game(GameController gameController) {
@@ -104,7 +110,7 @@ public class Game {
 		int heroInitiative = dice.getTripleDiceTotal() / 3;
 		dice.roll();
 		int villainInitiative = dice.getTripleDiceTotal() / 3;
-		System.out.println("HeroInit: "+heroInitiative+"\tVillainInit: "+villainInitiative);
+		System.out.println("HeroInit: " + heroInitiative + "\tVillainInit: " + villainInitiative);
 
 		if (heroInitiative >= villainInitiative) {
 			gameController.combat("You've won initiative step.");
@@ -189,6 +195,5 @@ public class Game {
 			gameController.gameLoop(map.getMap(), map.getMapSize(), player);
 		}
 	}
-
 
 }
