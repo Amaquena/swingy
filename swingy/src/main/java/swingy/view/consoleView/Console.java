@@ -122,11 +122,14 @@ public class Console {
 		// clearScreen();
 		System.out.println("Name: " + player.getName());
 		System.out.println("Class: " + capitalize(player.getHeroClass()));
-		System.out.println("Hp: " + player.getHp());
-		System.out.println("Attack: " + player.getAttack());
-		System.out.println("Defense: " + player.getDefense());
+		System.out.println("Hp: " + ANSI_GREEN + player.getHp() + ANSI_RESET);
+		System.out.println("Attack: " + ANSI_YELLOW + player.getAttack() + ANSI_RESET);
+		System.out.println("Defense: " + ANSI_PURPLE + player.getDefense() + ANSI_RESET);
 		System.out.println("XP: " + player.getXp());
 		System.out.println("Level: " + player.getLevel());
+		System.out.println("\nHelm: " + ANSI_GREEN + player.getHelm().getName() + ANSI_RESET + " + (" + ANSI_GREEN + player.getHelm().getHealth() + ANSI_RESET + " to hp)");
+		System.out.println("weapon: " + ANSI_YELLOW + player.getWeapon().getName() + ANSI_RESET + " + (" + ANSI_YELLOW + player.getWeapon().getAttack() + ANSI_RESET + " to attack)");
+		System.out.println("Armor: " + ANSI_PURPLE + player.getArmor().getName() + ANSI_RESET + " + (" + ANSI_PURPLE + player.getArmor().getDefense() + ANSI_RESET + " to defense)");
 		System.out.println();
 	}
 
