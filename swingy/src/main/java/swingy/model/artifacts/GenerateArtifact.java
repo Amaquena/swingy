@@ -6,8 +6,8 @@ import swingy.model.artifacts.weapons.*;
 
 public class GenerateArtifact {
 	public static Weapon newWeapon(String weapon) {
-		switch (weapon.toLowerCase()) {
-			case "rainbow Rod":
+		switch (weapon) {
+			case "rainbow rod":
 				return (new RainbowRod(weapon));
 			case "demonic sword":
 				return (new DemonicSword(weapon));
@@ -19,7 +19,7 @@ public class GenerateArtifact {
 				return (new Trident(weapon));
 			case "staff of zeus":
 				return (new StaffOfZeus(weapon));
-			case "Green arrow":
+			case "green arrow":
 				return (new GreenArrow(weapon));
 			case "lightning bolt":
 				return (new lightningBolt(weapon));
@@ -31,7 +31,7 @@ public class GenerateArtifact {
 	}
 
 	public static Armor newArmor(String armor) {
-		switch (armor.toLowerCase()) {
+		switch (armor) {
 			case "cloth":
 				return (new Cloth(armor));		
 			case "diamond armor":
@@ -56,7 +56,7 @@ public class GenerateArtifact {
 	}
 
 	public static Helm newHelm(String helm) {
-		switch (helm.toLowerCase()) {
+		switch (helm) {
 			case "cap":
 				return (new Cap(helm));
 			case "helm of destiny":

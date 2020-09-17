@@ -127,9 +127,12 @@ public class Console {
 		System.out.println("Defense: " + ANSI_PURPLE + player.getDefense() + ANSI_RESET);
 		System.out.println("XP: " + player.getXp());
 		System.out.println("Level: " + player.getLevel());
-		System.out.println("\nHelm: " + ANSI_GREEN + player.getHelm().getName() + ANSI_RESET + " + (" + ANSI_GREEN + player.getHelm().getHealth() + ANSI_RESET + " to hp)");
-		System.out.println("weapon: " + ANSI_YELLOW + player.getWeapon().getName() + ANSI_RESET + " + (" + ANSI_YELLOW + player.getWeapon().getAttack() + ANSI_RESET + " to attack)");
-		System.out.println("Armor: " + ANSI_PURPLE + player.getArmor().getName() + ANSI_RESET + " + (" + ANSI_PURPLE + player.getArmor().getDefense() + ANSI_RESET + " to defense)");
+		System.out.println("\nHelm: " + ANSI_GREEN + player.getHelm().getName() + ANSI_RESET + " + (" + ANSI_GREEN
+				+ player.getHelm().getHealth() + ANSI_RESET + " to hp)");
+		System.out.println("weapon: " + ANSI_YELLOW + player.getWeapon().getName() + ANSI_RESET + " + (" + ANSI_YELLOW
+				+ player.getWeapon().getAttack() + ANSI_RESET + " to attack)");
+		System.out.println("Armor: " + ANSI_PURPLE + player.getArmor().getName() + ANSI_RESET + " + (" + ANSI_PURPLE
+				+ player.getArmor().getDefense() + ANSI_RESET + " to defense)");
 		System.out.println();
 	}
 
@@ -150,13 +153,13 @@ public class Console {
 
 	public String moveCharacter() {
 		System.out.println("Type \"north\", \"south\", \"east\" or \"west\" to move your character.");
-		
+
 		try {
 			String command = "";
-			while (!command.equalsIgnoreCase("north") && !command.equalsIgnoreCase("south") &&
-					!command.equalsIgnoreCase("east") && !command.equalsIgnoreCase("west")) {
-						command = br.readLine();
-					}
+			while (!command.equalsIgnoreCase("north") && !command.equalsIgnoreCase("south")
+					&& !command.equalsIgnoreCase("east") && !command.equalsIgnoreCase("west")) {
+				command = br.readLine();
+			}
 			return command;
 		} catch (IOException e) {
 			System.err.println("I/O error");
@@ -164,13 +167,24 @@ public class Console {
 		return null;
 	}
 
-	public void outOfBoundsMessage() {
-		System.out.println("Well Done! You've managed to have fallen off.\nFlat earth confirmed.");
-		pressEnterToContinue();
+	public String outOfBoundsMessage() {
+		System.out.println("Well Done! You've managed to have fallen off and win.\nFlat earth confirmed.");
+		System.out.println("Do you want to continue playing?");
+
+		try {
+			String command = "";
+			while (!command.equalsIgnoreCase("yes") && !command.equalsIgnoreCase("no")) {
+				command = br.readLine();
+			}
+			return command;
+		} catch (IOException e) {
+			System.err.println("I/O error");
+		}
+		return null;
 	}
 
 	public String runOrFight(String enemy) {
-		System.out.println("You've encounted a "+enemy+", do you \"run\" or \"fight\"?");
+		System.out.println("You've encounted a " + enemy + ", do you \"run\" or \"fight\"?");
 
 		try {
 
@@ -193,5 +207,25 @@ public class Console {
 	public void fleeMessage() {
 		System.out.println("You've ran away, chicken! you find yourself at the samePlace. What now?");
 		pressEnterToContinue();
+	}
+
+	public String dropOrEquip(String item) {
+		System.out.println("The enemy " + ANSI_CYAN + item + ANSI_RESET + ". Do you want to \"equip\" or \"drop\"?");
+
+		try {
+			String command = "";
+			while (!command.equalsIgnoreCase("equip") && !command.equalsIgnoreCase("drop")) {
+				command = br.readLine();
+			}
+			return command;
+		} catch (IOException e) {
+			System.err.println("I/O error");
+		}
+		return null;
+	}
+
+	public void quitMessage() {
+		System.out.println(ANSI_BLUE + "\n\nGoodbye!!"+ANSI_RESET);
+		System.exit(0);
 	}
 }

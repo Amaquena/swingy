@@ -66,7 +66,8 @@ public class GameController {
 	}
 
 	public void outOfbounds() {
-		console.outOfBoundsMessage();
+		String userCommand = console.outOfBoundsMessage();
+		game.handleCommand(userCommand);
 	}
 
 	public void initiateFight(String enemy) {
@@ -78,7 +79,17 @@ public class GameController {
 		console.combatMessage(output);
 	}
 
+	public void itemDropChoice(String item) {
+		String userCommand = null;
+		userCommand = console.dropOrEquip(item);
+		game.handleCommand(userCommand);
+	}
+
 	public void flee() {
 		console.fleeMessage();
+	}
+
+	public void quit() {
+		console.quitMessage();
 	}
 }

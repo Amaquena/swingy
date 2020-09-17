@@ -81,4 +81,22 @@ public abstract class Hero {
 	public void takeDamage(int damage) {
 		hp -= damage;
 	}
+
+	public void equipWeapon(Weapon weapon) {
+		attack = attack - this.weapon.getAttack();
+		this.weapon = weapon;
+		attack = attack + weapon.getAttack();
+	}
+
+	public void equipArmor(Armor armor) {
+		defense = defense - this.armor.getDefense();
+		this.armor = armor;
+		defense = defense + armor.getDefense();
+	}
+
+	public void equipHelm(Helm helm) {
+		hp = hp - this.helm.getHealth();
+		this.helm = helm;
+		hp = hp + helm.getHealth();
+	}
 }
