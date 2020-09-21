@@ -210,7 +210,7 @@ public class Console {
 	}
 
 	public String dropOrEquip(String item) {
-		System.out.println("The enemy " + ANSI_CYAN + item + ANSI_RESET + ". Do you want to \"equip\" or \"drop\"?");
+		System.out.println("The enemy dropped " + ANSI_CYAN + item + ANSI_RESET + ". Do you want to \"equip\" or \"drop\"?");
 
 		try {
 			String command = "";
@@ -227,5 +227,10 @@ public class Console {
 	public void quitMessage() {
 		System.out.println(ANSI_BLUE + "\n\nGoodbye!!"+ANSI_RESET);
 		System.exit(0);
+	}
+
+	public void levelUpMessage() {
+		System.out.println(ANSI_BLUE+ "LEVEL UP!" +ANSI_RESET);
+		pressEnterToContinue();
 	}
 }

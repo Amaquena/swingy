@@ -34,6 +34,7 @@ public class Game {
 	private static List<String> arrayListWeapons = Arrays.asList(weapons);
 	private static List<String> arrayListArmor = Arrays.asList(armors);
 	private static List<String> arrayListHelm = Arrays.asList(helms);
+	private boolean levelUp = false;
 
 	public Game(GameController gameController) {
 		Game.gameController = gameController;
@@ -57,7 +58,7 @@ public class Game {
 			map.addPlayerToMap();
 			System.out.println("placing player...");
 			TimeUnit.SECONDS.sleep(1);
-			map.addEnemiesToMap();
+			map.addEnemiesToMap(player.getLevel());
 			System.out.println("generating enemies...");
 			// TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {
@@ -74,7 +75,7 @@ public class Game {
 			map.addPlayerToMap();
 			System.out.println("placing player...");
 			// TimeUnit.SECONDS.sleep(1);
-			map.addEnemiesToMap();
+			map.addEnemiesToMap(player.getLevel());
 			System.out.println("generating enemies...");
 			// TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {
@@ -93,6 +94,12 @@ public class Game {
 			run();
 		} else if (command.equalsIgnoreCase("fight")) {
 			fight();
+			if (levelUp == true) {
+				reCreateMap();
+				levelUp = false;
+			} else {
+				map.updateMap();
+			}
 		} else if (command.equalsIgnoreCase("equip")) {
 			equipItem();
 			map.updateMap();
@@ -118,12 +125,12 @@ public class Game {
 	public void engangeEnemy() {
 		int enemySelection = new Random().nextInt(4);
 		String enemy = enemies[enemySelection];
-		Game.enemy = GenerateVillain.newVillain(enemy);
+		Game.enemy = GenerateVillain.newVillain(enemy, player.getLevel());
 
 		gameController.initiateFight(Game.enemy.getName());
 	}
 
-	public void fight() {
+	private void fight() {
 		gameController.combat("You've engaged combat, good luck!");
 
 		gameController.combat("Rolling for initiative..");
@@ -147,8 +154,6 @@ public class Game {
 		boolean firstHit = true;
 
 		if (heroInit >= villainInit) {
-			// TODO: hero attack first
-			// TODO: add Artifact to damage calculation
 			gameController.combat("You land the first attack.");
 			do {
 				if (!firstHit) {
@@ -175,8 +180,6 @@ public class Game {
 				}
 			} while (player.getHp() > 0 && enemy.getHp() > 0);
 		} else if (villainInit > heroInit) {
-			// TODO: villain attack first
-			// TODO: add Artifact to defense calculation (subtract from enemy attack)
 			gameController.combat(enemy.getName() + " lands the first attack.");
 			do {
 				if (!firstHit) {
@@ -210,14 +213,16 @@ public class Game {
 		}
 		if (enemy.getHp() <= 0) {
 			gameController.combat("Enemy defeated.");
+			player.calculateXpGain(enemy.getXp());
+			// healthGain();
+			levelUpCheck();
 			dropLoot();
 		}
 	}
 
 	private void dropLoot() {
 		boolean chance = dice.getChance();
-		// TODO: place chance in if statemenet
-		if (true) {
+		if (chance) {
 			dice.roll();
 			int artifactRoll = dice.getThreeSideDie();
 			int itemRoll = dice.getEightSideDie();
@@ -247,15 +252,15 @@ public class Game {
 	private void equipItem() {
 		System.out.println("Item: " + Game.item.toLowerCase());
 		if (arrayListWeapons.contains(Game.item)) {
-			Weapon weapon = GenerateArtifact.newWeapon(item.toLowerCase());
+			Weapon weapon = GenerateArtifact.newWeapon(item.toLowerCase(), player.getLevel());
 			player.equipWeapon(weapon);
 		}
 		if (arrayListArmor.contains(Game.item)) {
-			Armor armor = GenerateArtifact.newArmor(item.toLowerCase());
+			Armor armor = GenerateArtifact.newArmor(item.toLowerCase(), player.getLevel());
 			player.equipArmor(armor);
 		}
 		if (arrayListHelm.contains(Game.item)) {
-			Helm helm = GenerateArtifact.newHelm(item.toLowerCase());
+			Helm helm = GenerateArtifact.newHelm(item.toLowerCase(), player.getLevel());
 			player.equipHelm(helm);
 		}
 	}
@@ -264,11 +269,36 @@ public class Game {
 		boolean chance = dice.getChance();
 		if (chance) {
 			gameController.flee();
-			gameController.gameLoop(map.getMap(), map.getMapSize(), player);
 		} else {
 			fight();
-			gameController.gameLoop(map.getMap(), map.getMapSize(), player);
+			if (levelUp == true) {
+				reCreateMap();
+				levelUp = false;
+			} else {
+				map.updateMap();
+			}
 		}
 	}
 
+	private void levelUpCheck() {
+		int level = player.getLevel();
+		int levelUpRequirement = level * 1000 + (int)Math.pow((level - 1), 2) * 450;
+
+		if (player.getXp() >= levelUpRequirement) {
+			player.calculateLevelGain(1);
+			levelUp = true;
+			gameController.levelUp();
+		} else {
+			if (levelUp == true) {
+				levelUp = false;
+			}
+		}
+	}
+
+	// private void healthGain() {
+		// TODO: Might have to remove function becuase to OP never loosing hp
+		// or Maybe increase enemy damage
+	// 	int hpGain = (int)(1.5 * enemy.getAttack());
+	// 	player.calculateHealthGain(hpGain);
+	// }
 }

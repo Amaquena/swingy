@@ -1,16 +1,16 @@
 package swingy.model.villains;
 
 public class GenerateVillain {
-	public static Villain newVillain(String villainName) {
+	public static Villain newVillain(String villainName, int playerLevel) {
 		switch (villainName) {
 			case "orc":
-				return (new Orc());
+				return (new Orc(playerLevel));
 			case "goblin":
-				return (new Goblin());
+				return (new Goblin(playerLevel));
 			case "skeleton":
-				return (new Skeleton());
+				return (new Skeleton(playerLevel));
 			case "zombie":
-				return (new Zombie());
+				return (new Zombie(playerLevel));
 			default:
 				break;
 		}

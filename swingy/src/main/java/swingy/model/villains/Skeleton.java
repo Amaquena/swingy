@@ -2,8 +2,11 @@ package swingy.model.villains;
 
 public class Skeleton extends Villain {
 
-	public Skeleton() {
-		super("skeleton", 6, 14, 60);
+	public Skeleton(int playerLevel) {
+		super("skeleton");
+		attack = (6 + 3) * playerLevel;
+		hp = (14 + 3) * playerLevel;
+		xp = 250 * playerLevel;
 	}
 	
 }

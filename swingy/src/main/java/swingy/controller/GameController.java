@@ -92,4 +92,8 @@ public class GameController {
 	public void quit() {
 		console.quitMessage();
 	}
+
+	public void levelUp() {
+		console.levelUpMessage();
+	}
 }

@@ -20,12 +20,13 @@ public abstract class Hero {
 	protected int defense;
 	protected int xp;
 	protected int level;
+	protected int maxHp;
 
 	public Hero(String name, String heroClass) {
 		this.name = name;
 		this.heroClass = heroClass;
 	}
-	
+
 	public Helm getHelm() {
 		return helm;
 	}
@@ -62,12 +63,24 @@ public abstract class Hero {
 		return xp;
 	}
 
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
+
 	public int getLevel() {
 		return level;
 	}
 
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public int getHp() {
 		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	public int getAttack() {
@@ -98,5 +111,35 @@ public abstract class Hero {
 		hp = hp - this.helm.getHealth();
 		this.helm = helm;
 		hp = hp + helm.getHealth();
+	}
+
+	public void calculateXpGain(int xp) {
+		this.setXp(this.getXp() + xp);
+	}
+
+	public void calculateLevelGain(int level) {
+		this.setLevel(this.getLevel() + level);
+
+		int attackWithoutWeapon = this.attack - this.weapon.getAttack();
+		int defenseWithoutArmor = this.defense - this.armor.getDefense();
+		
+		this.attack = ((attackWithoutWeapon * this.level) + this.weapon.getAttack());
+		this.defense = ((defenseWithoutArmor * this.level) + this.armor.getDefense());
+		this.hp = (maxHp * this.level) + this.helm.getHealth();
+	}
+
+	public void calculateHealthGain(int hp) {
+		int hpMinusHelm = this.getHp() - this.helm.getHealth();
+		int maxHpWithLevelMuliplyier = this.maxHp * this.getLevel();
+		int maxHpWithLevelMuliplyierAndHelm = (maxHp * this.getLevel()) + this.helm.getHealth();
+
+		if (hpMinusHelm < maxHpWithLevelMuliplyier) {
+			if (this.getHp() < maxHpWithLevelMuliplyierAndHelm) {
+				this.setHp(this.getHp() + hp);
+			}
+			if (maxHpWithLevelMuliplyier < this.getHp()) {
+				this.setHp(maxHpWithLevelMuliplyierAndHelm);
+			}
+		}
 	}
 }

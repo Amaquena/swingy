@@ -2,15 +2,12 @@ package swingy.model.villains;
 
 public abstract class Villain {
 	private String name;
-	private int attack;
-	private int hp;
-	private int xp;
+	protected int attack;
+	protected int hp;
+	protected int xp;
 
-	public Villain(String name, int attack, int hp, int xp) {
+	public Villain(String name) {
 		this.name = name;
-		this.setAttack(attack);
-		this.setHp(hp);
-		this.setXp(xp);
 	}
 
 	public String getName() {

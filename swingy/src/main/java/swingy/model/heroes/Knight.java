@@ -9,8 +9,8 @@ public class Knight extends Hero {
 	public Knight(String name) {
 		super(name, "knight");
 		hp = 20;
-		attack = 16;
-		defense = 5;
+		attack = 15;
+		defense = 6;
 		xp = 0;
 		level = 1;
 

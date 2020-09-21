@@ -31,16 +31,26 @@ public class Map {
 		map[(int) Math.ceil(mapSize / 2)][(int) Math.ceil(mapSize / 2)] = 'P';
 	}
 
-	public void addEnemiesToMap() {
-		int enemyCount = (int) Math.floor((mapSize * mapSize) / 6);
+	public void addEnemiesToMap(int playerLevel) {
+		int enemyCount = mapSize / 2;
 		int enemyPlacement = ThreadLocalRandom.current().nextInt(1, enemyCount + 1);
 		int k = 0;
 
+		if (playerLevel >= 5) {
+			enemyCount = mapSize / 6;
+		} else if (playerLevel >= 7 && playerLevel <= 9) {
+			enemyCount = mapSize / 6;
+		} else if (playerLevel > 9) {
+			enemyCount = mapSize / 10;
+		}
+		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				if (k == enemyPlacement && map[i][j] != 'P') {
 					map[i][j] = 'E';
 					enemyPlacement = ThreadLocalRandom.current().nextInt(1, enemyCount + 1);
+					k = 0;
+				} else if (k > enemyPlacement) {
 					k = 0;
 				} else {
 					k++;
@@ -56,7 +66,6 @@ public class Map {
 		int i = this.location[0];
 		int j = this.location[1];
 
-		// System.out.println("Player Position:\ni: " + playerLocation[0] + "\nj: " + playerLocation[1]);
 		if (direction.equalsIgnoreCase("north")) {
 			if (i - 1 >= 0) {
 				mapPoint = map[i - 1][j];

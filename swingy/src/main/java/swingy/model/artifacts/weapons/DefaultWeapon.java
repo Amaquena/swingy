@@ -6,5 +6,4 @@ public class DefaultWeapon extends Weapon {
 		super(name);
 		setAttack(0);
 	}
-	
 }
