@@ -32,6 +32,7 @@ public class GameController {
 			characterCreation();
 		} else if (mainMenuCommand == 2) {
 			// TODO: LoadGame information from a textfile
+			game.load();
 		}
 		mapCreation();
 	}
@@ -95,5 +96,9 @@ public class GameController {
 
 	public void levelUp() {
 		console.levelUpMessage();
+	}
+
+	public void loadDeadGuy() {
+		console.loadedDeadCharacter();
 	}
 }

@@ -9,14 +9,16 @@ public class Knight extends Hero {
 	public Knight(String name) {
 		super(name, "knight");
 		hp = 20;
+		maxHp = 20;
 		attack = 15;
 		defense = 6;
 		xp = 0;
 		level = 1;
+		isDead = false;
 
-		setWeapon(new DefaultWeapon("Default Weapon"));
-		setArmor(new DefaultArmor("Default Armor"));
-		setHelm(new DefaultHelm("Default Helm"));
+		setWeapon(new DefaultWeapon("Default Weapon", level));
+		setArmor(new DefaultArmor("Default Armor", level));
+		setHelm(new DefaultHelm("Default Helm", level));
 
 		attack += getWeapon().getAttack();
 		defense += getArmor().getDefense();

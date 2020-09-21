@@ -1,5 +1,11 @@
 package swingy.model.heroes;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,10 +27,22 @@ public abstract class Hero {
 	protected int xp;
 	protected int level;
 	protected int maxHp;
+	protected boolean isDead;
+
+	private static BufferedWriter saveFile = null;
+	private static BufferedReader loadFile = null;
 
 	public Hero(String name, String heroClass) {
 		this.name = name;
 		this.heroClass = heroClass;
+	}
+
+	public boolean getIsDead() {
+		return isDead;
+	}
+
+	public void setIsDead(boolean isDead) {
+		this.isDead = isDead;
 	}
 
 	public Helm getHelm() {
@@ -141,5 +159,48 @@ public abstract class Hero {
 				this.setHp(maxHpWithLevelMuliplyierAndHelm);
 			}
 		}
+	}
+
+	public void saveGame() {
+		try {
+			saveFile = new BufferedWriter(new FileWriter("savedGame.txt"));
+			saveFile.write(this.name + ',');
+			saveFile.write(this.heroClass + ',');
+			saveFile.write(String.valueOf(this.hp) + ',');
+			saveFile.write(String.valueOf(this.attack) + ',');
+			saveFile.write(String.valueOf(this.defense) + ',');
+			saveFile.write(String.valueOf(this.xp) + ',');
+			saveFile.write(String.valueOf(this.level) + ',');
+			saveFile.write(String.valueOf(this.maxHp) + ',');
+			saveFile.write(this.weapon.getName() + ',');
+			saveFile.write(this.armor.getName() + ',');
+			saveFile.write(this.helm.getName() + ',');
+			saveFile.write(String.valueOf(this.isDead));
+		} catch (IOException e) {
+			System.err.println("I/O error");
+		}
+
+		finally {
+			try {
+				if (saveFile != null) {
+					saveFile.close();
+				}
+			} catch (IOException e) {
+				System.err.println("I/O error");
+			}
+		}
+
+	}
+
+	public static String loadGame() {
+		try {
+			loadFile = new BufferedReader(new FileReader("savedGame.txt"));
+			String line = loadFile.readLine();
+			return line;
+			
+		} catch (IOException e) {
+			System.err.println("I/O error");
+		}
+		return "OOps!";
 	}
 }

@@ -152,12 +152,13 @@ public class Console {
 	}
 
 	public String moveCharacter() {
-		System.out.println("Type \"north\", \"south\", \"east\" or \"west\" to move your character.");
+		System.out.println("Type \"north\", \"south\", \"east\" or \"west\" to move your character. Or \"save\" to save your character.");
 
 		try {
 			String command = "";
 			while (!command.equalsIgnoreCase("north") && !command.equalsIgnoreCase("south")
-					&& !command.equalsIgnoreCase("east") && !command.equalsIgnoreCase("west")) {
+					&& !command.equalsIgnoreCase("east") && !command.equalsIgnoreCase("west")
+					&& !command.equalsIgnoreCase("save")) {
 				command = br.readLine();
 			}
 			return command;
@@ -231,6 +232,12 @@ public class Console {
 
 	public void levelUpMessage() {
 		System.out.println(ANSI_BLUE+ "LEVEL UP!" +ANSI_RESET);
+		pressEnterToContinue();
+	}
+
+	public void loadedDeadCharacter() {
+		System.out.println("Sorry, character already met his/her fate.");
+		System.out.println("Jumping to character creation.");
 		pressEnterToContinue();
 	}
 }

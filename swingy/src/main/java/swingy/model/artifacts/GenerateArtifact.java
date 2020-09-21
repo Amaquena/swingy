@@ -23,11 +23,10 @@ public class GenerateArtifact {
 				return (new GreenArrow(weapon, playerLevel));
 			case "lightning bolt":
 				return (new lightningBolt(weapon, playerLevel));
-		
+			
 			default:
-				break;
+				return (new DefaultWeapon(weapon, playerLevel));
 		}
-		return null;
 	}
 
 	public static Armor newArmor(String armor, int playerLevel) {
@@ -50,9 +49,8 @@ public class GenerateArtifact {
 				return (new DragonScales(armor, playerLevel));	
 		
 			default:
-				break;
+				return (new DefaultArmor(armor, playerLevel));
 		}
-		return null;
 	}
 
 	public static Helm newHelm(String helm, int playerLevel) {
@@ -75,8 +73,7 @@ public class GenerateArtifact {
 				return (new ICantBelieveItsNotBacon(helm, playerLevel));
 		
 			default:
-				break;
+				return (new DefaultHelm(helm, playerLevel));
 		}
-		return null;
 	}
 }

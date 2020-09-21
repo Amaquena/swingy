@@ -46,6 +46,16 @@ public class Game {
 		player = GenerateHero.newHero(heroName, heroClass);
 	}
 
+	
+	public void load() {
+		String playerData = Hero.loadGame();
+		player = GenerateHero.loadHero(playerData);
+		if (player.getIsDead()) {
+			gameController.loadDeadGuy();
+			gameController.characterCreation();
+		}
+	}
+
 	public Hero getPlayer() {
 		return player;
 	}
@@ -110,6 +120,8 @@ public class Game {
 			reCreateMap();
 		} else if (command.equalsIgnoreCase("no")) {
 			gameController.quit();
+		} else if (command.equalsIgnoreCase("save")) {
+			player.saveGame();
 		}
 
 		// 'X'-> outOfBounds; 'E'-> enemy
@@ -209,6 +221,8 @@ public class Game {
 
 		if (player.getHp() <= 0) {
 			gameController.combat("You DIED GAME OVER.");
+			player.setIsDead(true);
+			player.saveGame();
 			System.exit(1);
 		}
 		if (enemy.getHp() <= 0) {
