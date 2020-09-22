@@ -44,12 +44,18 @@ public class Game {
 
 	public void createPlayer(String heroName, String heroClass) {
 		player = GenerateHero.newHero(heroName, heroClass);
+		if (HeroTest.nameCheck(player)) {
+			gameController.characterCreation();
+		}
 	}
 
 	
 	public void load() {
 		String playerData = Hero.loadGame();
 		player = GenerateHero.loadHero(playerData);
+		if (HeroTest.nameCheck(player)) {
+			gameController.characterCreation();
+		}
 		if (player.getIsDead()) {
 			gameController.loadDeadGuy();
 			gameController.characterCreation();
@@ -122,6 +128,9 @@ public class Game {
 			gameController.quit();
 		} else if (command.equalsIgnoreCase("save")) {
 			player.saveGame();
+		} else if (command.equalsIgnoreCase("quit")) {
+			player.saveGame();
+			gameController.quit();
 		}
 
 		// 'X'-> outOfBounds; 'E'-> enemy
@@ -309,9 +318,9 @@ public class Game {
 		}
 	}
 
+	// TODO: Might have to remove function becuase to OP never loosing hp
+	// or Maybe increase enemy damage
 	// private void healthGain() {
-		// TODO: Might have to remove function becuase to OP never loosing hp
-		// or Maybe increase enemy damage
 	// 	int hpGain = (int)(1.5 * enemy.getAttack());
 	// 	player.calculateHealthGain(hpGain);
 	// }

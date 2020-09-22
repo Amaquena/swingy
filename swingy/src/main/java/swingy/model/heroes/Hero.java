@@ -6,7 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import swingy.model.artifacts.armors.Armor;
@@ -14,19 +19,32 @@ import swingy.model.artifacts.helms.Helm;
 import swingy.model.artifacts.weapons.Weapon;
 
 public abstract class Hero {
-	@NotNull(message = "Name cannot be null")
-	@Size(min = 2, max = 10)
+	@NotBlank(message = "Name is Mandatory")
+	@NotNull(message = "Name can't be null")
+	@Size(min = 2, max = 10, message = "Name must be between {min} and {max}")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Name must be Alphanumeric")
 	private String name;
+	@NotNull (message = "Hero class can't be null")
 	private String heroClass;
+	@NotNull (message = "Weapon can't be null")
 	protected Weapon weapon;
+	@NotNull (message = "Armor can't be null")
 	protected Armor armor;
+	@NotNull(message = "Helm can't be null")
 	protected Helm helm;
+	@Min(value = 0, message = "Hero needs Hp to be alive. Must be more than 0")
 	protected int hp;
+	@Min(value = 0, message = "No attack, no game. Must be more than 0")
 	protected int attack;
+	@Min(value = 0, message = "No defense, no build. Must be more than 0")
 	protected int defense;
+	@Min(value = 0, message = "Xp must be more than 0")
 	protected int xp;
+	@Min(value = 0, message = "Level must be more than 1")
 	protected int level;
+	@Max(value = 20, message = "MaxHp varies between heroes. Mage = 14, Archer = 15, Knight = 20 and Samurai = 18")
 	protected int maxHp;
+	@AssertFalse(message = "False = alive, true = dead")
 	protected boolean isDead;
 
 	private static BufferedWriter saveFile = null;
@@ -177,7 +195,8 @@ public abstract class Hero {
 			saveFile.write(this.helm.getName() + ',');
 			saveFile.write(String.valueOf(this.isDead));
 		} catch (IOException e) {
-			System.err.println("I/O error");
+			System.err.println("I/O error. Failed to write to saveFile.");
+			System.exit(1);
 		}
 
 		finally {
@@ -186,7 +205,8 @@ public abstract class Hero {
 					saveFile.close();
 				}
 			} catch (IOException e) {
-				System.err.println("I/O error");
+				System.err.println("I/O error. Failed to close saveFile.");
+				System.exit(1);
 			}
 		}
 
@@ -197,9 +217,19 @@ public abstract class Hero {
 			loadFile = new BufferedReader(new FileReader("savedGame.txt"));
 			String line = loadFile.readLine();
 			return line;
-			
 		} catch (IOException e) {
-			System.err.println("I/O error");
+			System.err.println("I/O error. Failed to read loadFile.");
+			System.exit(1);
+		}
+		finally {
+			try {
+				if (loadFile != null) {
+					loadFile.close();
+				}
+			} catch (IOException e) {
+				System.out.println("2I/O error. failed to close loadFile.");
+				System.exit(1);
+			}
 		}
 		return "OOps!";
 	}

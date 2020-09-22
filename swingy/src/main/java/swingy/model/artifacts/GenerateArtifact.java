@@ -23,9 +23,11 @@ public class GenerateArtifact {
 				return (new GreenArrow(weapon, playerLevel));
 			case "lightning bolt":
 				return (new lightningBolt(weapon, playerLevel));
-			
-			default:
+			case "default weapon":
 				return (new DefaultWeapon(weapon, playerLevel));
+
+			default:
+				return null;
 		}
 	}
 
@@ -46,10 +48,12 @@ public class GenerateArtifact {
 			case "shitagi":
 				return (new Shitagi(armor, playerLevel));
 			case "dragon scales":
-				return (new DragonScales(armor, playerLevel));	
-		
-			default:
+				return (new DragonScales(armor, playerLevel));
+			case "default armor":
 				return (new DefaultArmor(armor, playerLevel));
+
+			default:
+				return null;
 		}
 	}
 
@@ -71,9 +75,11 @@ public class GenerateArtifact {
 				return (new EyePatch(helm, playerLevel));
 			case "i can't believe it's not bacon":
 				return (new ICantBelieveItsNotBacon(helm, playerLevel));
-		
-			default:
+			case "default helm":
 				return (new DefaultHelm(helm, playerLevel));
+
+			default:
+				return null;
 		}
 	}
 }

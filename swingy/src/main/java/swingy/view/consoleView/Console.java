@@ -63,7 +63,7 @@ public class Console {
 
 	public String getHeroName() {
 		try {
-			clearScreen();
+			// clearScreen();
 			String heroName = null;
 			System.out.println("\t\tHero Creation\n\n");
 			System.out.println("\tWhat's your name?");
@@ -127,17 +127,17 @@ public class Console {
 		System.out.println("Defense: " + ANSI_PURPLE + player.getDefense() + ANSI_RESET);
 		System.out.println("XP: " + player.getXp());
 		System.out.println("Level: " + player.getLevel());
-		System.out.println("\nHelm: " + ANSI_GREEN + player.getHelm().getName() + ANSI_RESET + " + (" + ANSI_GREEN
+		System.out.println("\nHelm: " + ANSI_GREEN + capitalize(player.getHelm().getName()) + ANSI_RESET + " + (" + ANSI_GREEN
 				+ player.getHelm().getHealth() + ANSI_RESET + " to hp)");
-		System.out.println("weapon: " + ANSI_YELLOW + player.getWeapon().getName() + ANSI_RESET + " + (" + ANSI_YELLOW
+		System.out.println("weapon: " + ANSI_YELLOW + capitalize(player.getWeapon().getName()) + ANSI_RESET + " + (" + ANSI_YELLOW
 				+ player.getWeapon().getAttack() + ANSI_RESET + " to attack)");
-		System.out.println("Armor: " + ANSI_PURPLE + player.getArmor().getName() + ANSI_RESET + " + (" + ANSI_PURPLE
+		System.out.println("Armor: " + ANSI_PURPLE + capitalize(player.getArmor().getName()) + ANSI_RESET + " + (" + ANSI_PURPLE
 				+ player.getArmor().getDefense() + ANSI_RESET + " to defense)");
 		System.out.println();
 	}
 
 	public void displayInstructions() {
-		clearScreen();
+		// clearScreen();
 		System.out.println("Welcome to Swingy, a text-based RPG that's loads of \"fun\".");
 		System.out.println(
 				"You'll be placed in the center of a grid where you'll have to try and reach either of the edges.");
@@ -152,13 +152,13 @@ public class Console {
 	}
 
 	public String moveCharacter() {
-		System.out.println("Type \"north\", \"south\", \"east\" or \"west\" to move your character. Or \"save\" to save your character.");
+		System.out.println("Type \"north\", \"south\", \"east\" or \"west\" to move your character. Or \"save\" to save your character. Or \"quit\".");
 
 		try {
 			String command = "";
 			while (!command.equalsIgnoreCase("north") && !command.equalsIgnoreCase("south")
 					&& !command.equalsIgnoreCase("east") && !command.equalsIgnoreCase("west")
-					&& !command.equalsIgnoreCase("save")) {
+					&& !command.equalsIgnoreCase("save") && !command.equalsIgnoreCase("quit")) {
 				command = br.readLine();
 			}
 			return command;

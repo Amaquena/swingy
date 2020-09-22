@@ -16,9 +16,9 @@ public class Samurai extends Hero {
 		level = 1;
 		isDead = false;
 
-		setWeapon(new DefaultWeapon("Default Weapon", level));
-		setArmor(new DefaultArmor("Default Armor", level));
-		setHelm(new DefaultHelm("Default Helm", level));
+		setWeapon(new DefaultWeapon("default weapon", level));
+		setArmor(new DefaultArmor("default armor", level));
+		setHelm(new DefaultHelm("default helm", level));
 
 		attack += getWeapon().getAttack();
 		defense += getArmor().getDefense();
