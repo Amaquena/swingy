@@ -5,19 +5,20 @@ import javax.swing.SwingUtilities;
 import swingy.model.Game;
 import swingy.model.heroes.Hero;
 import swingy.view.consoleView.Console;
-// import swingy.view.guiView.Gui;
+import swingy.view.guiView.Gui;
 
 public class GameController {
 	private static Console console = null;
 	private static Game game = null;
 
 	public GameController(int interfaceType) {
+		game = new Game(this);
 		if (interfaceType == 1) {
 			console = new Console(this);
 		} else if (interfaceType == 2) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					// new Gui();
+					new Gui(GameController.this);
 				}
 			});
 		}
@@ -27,7 +28,6 @@ public class GameController {
 	}
 
 	public void initializeGame(int mainMenuCommand) {
-		game = new Game(this);
 		if (mainMenuCommand == 1) {
 			characterCreation();
 		} else if (mainMenuCommand == 2) {

@@ -35,6 +35,8 @@ public class Console {
 		try {
 			System.in.read();
 		} catch (Exception e) {
+			System.err.println("Something went wrong when conitnue...");
+			System.exit(1);
 		}
 	}
 
@@ -58,6 +60,7 @@ public class Console {
 			gameController.initializeGame(Integer.parseInt(line));
 		} catch (IOException e) {
 			System.err.println("Invalid input");
+			System.exit(1);
 		}
 	}
 
@@ -71,7 +74,8 @@ public class Console {
 			heroName = br.readLine();
 			return heroName;
 		} catch (IOException e) {
-			System.out.print("I/O error");
+			System.err.print("I/O error. Problem getting player name");
+			System.exit(1);
 		}
 		return null;
 	}
@@ -98,7 +102,8 @@ public class Console {
 			}
 			return heroClass;
 		} catch (IOException e) {
-			System.out.print("I/O error");
+			System.err.print("I/O error, Problem getting player class");
+			System.exit(1);
 		}
 		return null;
 	}
@@ -163,7 +168,8 @@ public class Console {
 			}
 			return command;
 		} catch (IOException e) {
-			System.err.println("I/O error");
+			System.err.println("I/O error. Problem getting player command.");
+			System.exit(1);
 		}
 		return null;
 	}
@@ -179,7 +185,8 @@ public class Console {
 			}
 			return command;
 		} catch (IOException e) {
-			System.err.println("I/O error");
+			System.err.println("I/O error. Problem getting player answer.");
+			System.exit(1);
 		}
 		return null;
 	}
@@ -195,7 +202,8 @@ public class Console {
 			}
 			return command;
 		} catch (IOException e) {
-			System.err.println("I/O error");
+			System.err.println("I/O error. Problem with run and fight.");
+			System.exit(1);
 		}
 		return null;
 	}
@@ -220,7 +228,8 @@ public class Console {
 			}
 			return command;
 		} catch (IOException e) {
-			System.err.println("I/O error");
+			System.err.println("I/O error. Problem with equip/dropping item.");
+			System.exit(1);
 		}
 		return null;
 	}

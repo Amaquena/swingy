@@ -69,16 +69,17 @@ public class Game {
 	public void createMap() {
 		try {
 			System.out.println("generating map...");
-			// TimeUnit.SECONDS.sleep(3);
+			TimeUnit.SECONDS.sleep(3);
 			map.generateMap(player.getLevel());
 			map.addPlayerToMap();
 			System.out.println("placing player...");
 			TimeUnit.SECONDS.sleep(1);
 			map.addEnemiesToMap(player.getLevel());
 			System.out.println("generating enemies...");
-			// TimeUnit.SECONDS.sleep(2);
+			TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {
 			System.out.println("system sleep error.");
+			System.exit(1);
 		}
 		gameController.startGame(map.getMap(), map.getMapSize(), player);
 	}
@@ -90,12 +91,13 @@ public class Game {
 			map.generateMap(player.getLevel());
 			map.addPlayerToMap();
 			System.out.println("placing player...");
-			// TimeUnit.SECONDS.sleep(1);
+			TimeUnit.SECONDS.sleep(1);
 			map.addEnemiesToMap(player.getLevel());
 			System.out.println("generating enemies...");
-			// TimeUnit.SECONDS.sleep(2);
+			TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {
 			System.out.println("system sleep error.");
+			System.exit(1);
 		}
 		gameController.gameLoop(map.getMap(), map.getMapSize(), player);
 	}
@@ -125,6 +127,7 @@ public class Game {
 			// yes is from GameControler.outOfbounds
 			reCreateMap();
 		} else if (command.equalsIgnoreCase("no")) {
+			// no is from GameControler.outOfbounds
 			gameController.quit();
 		} else if (command.equalsIgnoreCase("save")) {
 			player.saveGame();
@@ -137,7 +140,6 @@ public class Game {
 		if (newPosition == 'X') {
 			gameController.outOfbounds();
 		} else if (newPosition == 'E') {
-			System.out.println("battle Mode");
 			engangeEnemy();
 		}
 		gameController.gameLoop(map.getMap(), map.getMapSize(), player);
@@ -159,7 +161,6 @@ public class Game {
 		int heroInitiative = dice.getTripleDiceTotal() / 3;
 		dice.roll();
 		int villainInitiative = dice.getTripleDiceTotal() / 3;
-		System.out.println("HeroInit: " + heroInitiative + "\tVillainInit: " + villainInitiative);
 
 		if (heroInitiative >= villainInitiative) {
 			gameController.combat("You've won initiative step.");
@@ -249,7 +250,6 @@ public class Game {
 			dice.roll();
 			int artifactRoll = dice.getThreeSideDie();
 			int itemRoll = dice.getEightSideDie();
-			System.out.println("ArtifactRoll: " + artifactRoll + "\t itemRoll: " + itemRoll);
 
 			String artifact = artifacts[artifactRoll];
 			switch (artifact) {
@@ -273,7 +273,6 @@ public class Game {
 	}
 
 	private void equipItem() {
-		System.out.println("Item: " + Game.item.toLowerCase());
 		if (arrayListWeapons.contains(Game.item)) {
 			Weapon weapon = GenerateArtifact.newWeapon(item.toLowerCase(), player.getLevel());
 			player.equipWeapon(weapon);
