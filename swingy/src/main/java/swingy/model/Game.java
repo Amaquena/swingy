@@ -53,15 +53,16 @@ public class Game {
 		String playerData = Hero.loadGame();
 		player = GenerateHero.loadHero(playerData);
 		if (HeroTest.nameCheck(player)) {
-			player = null;
 			if (interfaceType == 1) {
 				gameController.characterCreation();
 			} else {
 				gameController.heroCheck("fail");
 			}
 		} else {
-			createMapGui();
-			gameController.heroCheck("pass");
+			if (interfaceType == 2) {
+				createMapGui();
+				gameController.heroCheck("pass");
+			}
 		}
 		// if (player.getIsDead()) {
 		// 	gameController.loadDeadGuy();

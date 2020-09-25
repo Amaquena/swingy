@@ -1,6 +1,5 @@
 package swingy.view.guiView;
 
-import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.BoxLayout;
@@ -192,8 +191,8 @@ public class GamePanel extends JPanel {
 		msg = msg + "Do you want to continue playing?";
 		int n = JOptionPane.showConfirmDialog(GamePanel.this, msg, "So Do You?", JOptionPane.YES_NO_OPTION);
 		if (n == 1) {
-			// TODO: Save game;
 			JOptionPane.showMessageDialog(GamePanel.this, "GoodBye", "Bye", JOptionPane.INFORMATION_MESSAGE);
+			gameController.gameLoop("save", null, 0, null);
 			gui.quit();
 		} else {
 			gameController.gameLoop("yes", null, 0, null);

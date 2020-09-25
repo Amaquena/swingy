@@ -2,11 +2,9 @@ package swingy.view.guiView;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 
-import java.awt.*;
 import java.awt.event.*;
 
 public class MainMenuPanel extends JPanel {
@@ -39,9 +37,7 @@ public class MainMenuPanel extends JPanel {
 		});
 		loadGameButton.addActionListener((new ActionListener() {
 			public void actionPerformed(ActionEvent e ) {
-				//TODO: loadgame actionlistener
 				gui.loadGame();
-				// gui.startGame();
 			}
 		}));
 	}
