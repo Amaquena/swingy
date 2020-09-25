@@ -49,21 +49,34 @@ public class Game {
 		}
 	}
 
-	
-	public void load() {
+	public void load(int interfaceType) {
 		String playerData = Hero.loadGame();
 		player = GenerateHero.loadHero(playerData);
 		if (HeroTest.nameCheck(player)) {
-			gameController.characterCreation();
+			player = null;
+			if (interfaceType == 1) {
+				gameController.characterCreation();
+			} else {
+				gameController.heroCheck("fail");
+			}
+		} else {
+			createMapGui();
+			gameController.heroCheck("pass");
 		}
-		if (player.getIsDead()) {
-			gameController.loadDeadGuy();
-			gameController.characterCreation();
-		}
+		// if (player.getIsDead()) {
+		// 	gameController.loadDeadGuy();
+		// 	if (interfaceType == 1) {
+		// 		gameController.characterCreation();
+		// 	}
+		// }
 	}
 
 	public Hero getPlayer() {
 		return player;
+	}
+
+	public Map getMap() {
+		return map;
 	}
 
 	public void createMap() {
@@ -82,6 +95,12 @@ public class Game {
 			System.exit(1);
 		}
 		gameController.startGame(map.getMap(), map.getMapSize(), player);
+	}
+
+	public void createMapGui() {
+		map.generateMap(player.getLevel());
+		map.addPlayerToMap();
+		map.addEnemiesToMap(player.getLevel());
 	}
 
 	public void reCreateMap() {
@@ -143,6 +162,61 @@ public class Game {
 			engangeEnemy();
 		}
 		gameController.gameLoop(map.getMap(), map.getMapSize(), player);
+	}
+
+	public void handleCommandGui(String command) {
+		char newPosition = '\0';
+
+		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("south") || command.equalsIgnoreCase("east")
+				|| command.equalsIgnoreCase("west")) {
+			newPosition = map.investigatePosition(command);
+		} else if (command.equalsIgnoreCase("run")) {
+			boolean chance = dice.getChance();
+			if (chance) {
+				gameController.flee();
+			} else {
+				fightGui();
+			}
+		} else if (command.equalsIgnoreCase("fight")) {
+			fightGui();
+		} else if (command.equalsIgnoreCase("equip")) {
+			equipItem();
+			map.updateMap();
+		} else if (command.equalsIgnoreCase("drop")) {
+			map.updateMap();
+		} else if (command.equalsIgnoreCase("yes")) {
+			// yes is from GameControler.outOfbounds
+			createMapGui();
+		} else if (command.equalsIgnoreCase("save")) {
+			player.saveGame();
+		} else if (command.equalsIgnoreCase("quit")) {
+			player.saveGame();
+			gameController.quit();
+		}
+		else if (command.equalsIgnoreCase("load")) {
+			load(2);
+			// createMapGui();
+		}
+
+		// 'X'-> outOfBounds; 'E'-> enemy
+		if (newPosition == 'X') {
+			gameController.outOfbounds();
+		} else if (newPosition == 'E') {
+			engangeEnemy();
+		}
+		if (!command.equalsIgnoreCase("load")) {
+			gameController.gameLoop("reset", map.getMap(), map.getMapSize(), player);
+		}
+	}
+
+	private void fightGui() {
+		fight();
+		if (levelUp == true) {
+			createMapGui();
+			levelUp = false;
+		} else {
+			map.updateMap();
+		}
 	}
 
 	public void engangeEnemy() {
@@ -304,7 +378,7 @@ public class Game {
 
 	private void levelUpCheck() {
 		int level = player.getLevel();
-		int levelUpRequirement = level * 1000 + (int)Math.pow((level - 1), 2) * 450;
+		int levelUpRequirement = level * 1000 + (int) Math.pow((level - 1), 2) * 450;
 
 		if (player.getXp() >= levelUpRequirement) {
 			player.calculateLevelGain(1);
@@ -320,7 +394,7 @@ public class Game {
 	// TODO: Might have to remove function becuase to OP never loosing hp
 	// or Maybe increase enemy damage
 	// private void healthGain() {
-	// 	int hpGain = (int)(1.5 * enemy.getAttack());
-	// 	player.calculateHealthGain(hpGain);
+	// int hpGain = (int)(1.5 * enemy.getAttack());
+	// player.calculateHealthGain(hpGain);
 	// }
 }

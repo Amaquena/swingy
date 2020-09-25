@@ -22,9 +22,22 @@ public class Map {
 	public char[][] getMap() {
 		return map;
 	}
+
+	public void setMap(char[][] map) {
+		this.map = map;
+		// for (int i = 0; i < mapSize; i++) {
+		// 	for (int j = 0; j < mapSize; j++) {
+		// 		this.map[i][j] = map[i][j];
+		// 	}
+		// }
+	}
 	
 	public int getMapSize() {
 		return mapSize;
+	}
+
+	public void setMapSize(int mapSize) {
+		this.mapSize = mapSize;
 	}
 
 	public void addPlayerToMap() {
