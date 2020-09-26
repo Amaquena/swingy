@@ -145,13 +145,13 @@ public class Console {
 		// clearScreen();
 		System.out.println("Welcome to Swingy, a text-based RPG that's loads of \"fun\".");
 		System.out.println(
-				"You'll be placed in the center of a grid where you'll have to try and reach either of the edges.");
+				"You'll be placed in the center of a grid where you'll have to try and reach either of the edges and win.");
 		System.out.println(
 				"You can move \"north\", \"south\", \"east\" or \"west\" and will encounter enemies along the way.");
 		System.out.println(
 				"Enemies will be places randomly on the map and will have a chance to drop loot and give you xp after being defeated.");
 		System.out.println(
-				"The map size is determined by your level and too complete the game you'll have to reach level 6.");
+				"The map size is determined by your level.");
 		System.out.println("Good Luck!.");
 		pressEnterToContinue();
 	}

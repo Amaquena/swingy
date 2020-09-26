@@ -162,13 +162,13 @@ public class GamePanel extends JPanel {
 
 		instructions = "Welcome to Swingy, a text-based RPG that's loads of \"fun\".\n";
 		instructions = instructions
-				+ "You'll be placed in the center of a grid where you'll have to try and reach either of the edges.\n";
+				+ "You'll be placed in the center of a grid where you'll have to try and reach either of the edges and win.\n";
 		instructions = instructions
 				+ "You can move \"north\", \"south\", \"east\" or \"west\" and will encounter enemies along the way.\n";
 		instructions = instructions
 				+ "Enemies will be places randomly on the map and will have a chance to drop loot and give you xp after being defeated.\n";
 		instructions = instructions
-				+ "The map size is determined by your level and too complete the game you'll have to reach level 6.\n";
+				+ "The map size is determined by your level.\n";
 		instructions = instructions + "Good Luck!.\n";
 
 		JOptionPane.showMessageDialog(GamePanel.this, instructions, "Instructions", JOptionPane.INFORMATION_MESSAGE);
