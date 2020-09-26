@@ -40,7 +40,7 @@ public abstract class Hero {
 	protected int defense;
 	@Min(value = 0, message = "Xp must be more than 0")
 	protected int xp;
-	@Min(value = 0, message = "Level must be more than 1")
+	@Min(value = 1, message = "Level must be more than 1")
 	protected int level;
 	@Max(value = 20, message = "MaxHp varies between heroes. Mage = 14, Archer = 15, Knight = 20 and Samurai = 18")
 	protected int maxHp;
